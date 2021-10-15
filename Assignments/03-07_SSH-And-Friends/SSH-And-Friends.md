@@ -4,8 +4,6 @@ Unix computers that have enabled the `secure shell` (SSH) protocol can be contro
 that allow interaction with the remote computer almost as if the user were physically present
 
 * On your VM, ssh has been enabled with the shell command `sudo apt -y install openssh-server`
-
-	* Done [ABM]
 	
 ## Login via SSH
 0. Connecting via SSH requires, at a minimum, knowledge of a username and password for the computer being connected to
@@ -36,8 +34,6 @@ that allow interaction with the remote computer almost as if the user were physi
    * When the econ-ark user uses ssh to connect as the econ-ark user to localost, everything looks identical to the way it would look before the ssh command
    * Logging in as root first allows you to see that you have actually accomplished something with the ssh command
 
-	* Done [ABM]
-	
 ## Copy files via `scp`
 
 Once you have exited back to your original `econ-ark` identity, it is time to learn the second tool in the ssh suite: `scp` which is short for `secure copy`
@@ -48,13 +44,11 @@ We are going to again become root for the purpose of executing this command. Bel
 
     su # to become the root user -- you will have to give the password
 	mkdir -p /tmp/Methods/Assignments # to create the directory into which the files will be copied
-	scp -r econ-ark@localhost:/home/econ-ark/GitHub/Methods/Assignments/* /tmp/Methods/Assignments
+	scp -r econ-ark@localhost:/home/econ-ark/GitHub/ccarrollATjhuecon/Methods/Assignments/* /tmp/Methods/Assignments
 
 A Google search for `scp command examples` will turn up a host of other ways to use the command. You can also do a bit of
 prep work so that you do not need to enter your password for the remote machine every time you use the command.
 
-	* Done [ABM]
-	
 ## SSH keys
 
 If you will be connecting regularly from your computer to online resources using ssh tools, it will be convenient for your user to have a a `key` that you can upload to the remote resource machine so that it can recognize your machine without the necessity of always entering a username and password.
@@ -77,8 +71,6 @@ If the keys DO exist already, you need to make sure they have the right permissi
   `sudo chmod 600 ~/.ssh/id_rsa`
   `sudo chmod 644 ~/.ssh/id_rsa.pub`
 
-	* Done [ABM]
-	
 ## Registering your key with a remote resource (GitHub)
 
    Registering your key allows you to interact with a remote machine without the cumbersome requirement to enter a username and password at every step. This is particularly convenient when interacting with GitHub.
@@ -104,8 +96,6 @@ You would need to change this using a command like:
 
   `git remote set-url origin git@github.com/ccarrollATjhuecon/BST-Shared.git`
 
-	* Done [ABM]
-	
 ## Git Credential Helper
 
 Another way to avoid having always to enter your password is to use a `credential-helper`
@@ -119,25 +109,21 @@ To set up the credential helper, from a shell:
    `git config --global credential.helper cache`
    `git config --global credential.helper 'cache --timeout=3600'`
 
-	* Done [ABM]
-	
 ## Mount A Network Drive
 
 The `sshfs` tool allows you to securely mount a directory or drive on the remote machine in such a way that, while mounted, it becomes part of the filesystem of the host machine.
 
 	sudo apt -y install sshfs # It is probably already installed
 	sudo mkdir -p /mnt/Methods # Make the 'mount point' where the new content will be accessible
-	sudo sshfs -o allow_other -o IdentityFile=~/.ssh/id_rsa.pub econ-ark@localhost:/home/econ-ark/GitHub/Methods /mnt/Methods
+	sudo sshfs -o allow_other -o IdentityFile=~/.ssh/id_rsa.pub econ-ark@localhost:/home/econ-ark/GitHub/ccarrollATjhuecon/Methods /mnt/Methods
 
 Now if you do
 
 	ls /home/econ-ark/GitHub/Methods
-	ls /mnt/Econ-Ark
+	ls /mnt/Methods
 
 you should see exactly the same listing, because these are two paths to the same object
 
 The command to unmount:
 
 	sudo fusermount -u /mnt/Methods
-
-	* Done [ABM]
